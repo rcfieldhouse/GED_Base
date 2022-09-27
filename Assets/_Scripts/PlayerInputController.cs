@@ -10,12 +10,13 @@ public class PlayerInputController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-       //this do be the singleton logic
+        inputAction = new PlayerAction();
+        //this do be the singleton logic
         if (controller == null)
         {
             controller = this;
         }
-        inputAction = new PlayerAction();
+       
     }
     private void OnEnable()
     {
