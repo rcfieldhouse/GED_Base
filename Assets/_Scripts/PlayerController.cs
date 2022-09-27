@@ -9,32 +9,32 @@ public class PlayerController : MonoBehaviour
     Vector2 move;
     Vector2 rotate;
     Rigidbody rb;
-    
+    public static PlayerController instance;
 
     private float distanceToGround;
     bool isGrounded = true;
-    public float jump = 5f;
+    public float jump = 15f;
     public float walkSpeed = 5f;
     public Camera playerCamera;
     Vector3 cameraRotation;
 
     private Animator animator;
-    [SerializeField] private bool isWalking = false,isRunning = false;
+    private bool isWalking = false,isRunning = false;
 
     public GameObject projectile;
     public Transform projectilePos;
 
-    private void OnEnable() {
-        inputAction.Enable();
-    }
 
-    private void OnDisable() {
-        inputAction.Disable();
-    }
 
-    private void Awake() {
+    private void Start() {
 
-        inputAction = new PlayerAction();
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        //  inputAction
+        inputAction = PlayerInputController.controller.inputAction;
 
         inputAction.Player.Jump.performed += cntxt => Jump();
 
@@ -60,11 +60,13 @@ public class PlayerController : MonoBehaviour
     {
         isRunning = TF;
     }
+
+    
     private void Jump()
     {
         if(isGrounded)
         {
-          
+            animator.SetBool("Jumped", true);
             rb.velocity = new Vector2(rb.velocity.x, jump);
             isGrounded = false;
         }
@@ -80,6 +82,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetBool("Jumped", !isGrounded);
+        animator.SetBool("Landed", isGrounded);
         cameraRotation = new Vector3(cameraRotation.x + rotate.y, cameraRotation.y + rotate.x, cameraRotation.z);
         
         playerCamera.transform.rotation = Quaternion.Euler(cameraRotation);
