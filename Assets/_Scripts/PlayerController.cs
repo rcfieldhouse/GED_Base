@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     Vector2 move;
     Vector2 rotate;
     Rigidbody rb;
+    
 
     private float distanceToGround;
     bool isGrounded = true;
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     Vector3 cameraRotation;
 
     private Animator animator;
-    private bool isWalking = false;
+    [SerializeField] private bool isWalking = false,isRunning = false;
 
     public GameObject projectile;
     public Transform projectilePos;
@@ -43,8 +44,11 @@ public class PlayerController : MonoBehaviour
         inputAction.Player.Look.performed += cntxt => rotate = cntxt.ReadValue<Vector2>();
         inputAction.Player.Look.canceled += cntxt => rotate = Vector2.zero;
 
-        inputAction.Player.Shoot.performed += cntxt => Shoot();      
+        inputAction.Player.Shoot.performed += cntxt => Shoot();
 
+        inputAction.Player.Sprint.canceled += cntxt => Sprint(false);
+        inputAction.Player.Sprint.performed += cntxt => Sprint(true);
+     
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
 
@@ -52,11 +56,15 @@ public class PlayerController : MonoBehaviour
         cameraRotation = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
         
     }
-
+    private void Sprint(bool TF)
+    {
+        isRunning = TF;
+    }
     private void Jump()
     {
         if(isGrounded)
         {
+          
             rb.velocity = new Vector2(rb.velocity.x, jump);
             isGrounded = false;
         }
@@ -66,7 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         Rigidbody bulletRb = Instantiate(projectile, projectilePos.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
         bulletRb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-        bulletRb.AddForce(transform.up * 1f, ForceMode.Impulse);
+        bulletRb.AddForce(transform.up * 3f, ForceMode.Impulse);
     }
 
     // Update is called once per frame
@@ -90,5 +98,6 @@ public class PlayerController : MonoBehaviour
     {
         isWalking = (m.x > 0.1f || m.x < -0.1f) || (m.z > 0.1f || m.z < -0.1f) ? true : false;
         animator.SetBool("isWalking", isWalking);
+        animator.SetBool("IsRunning", isRunning);
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -493,7 +493,7 @@ MonoBehaviour:
   health: 120
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 5
-  timeBetweenAttacks: 0.5
+  timeBetweenAttacks: 2
   projectile: {fileID: 3811167990288252575, guid: 14e4aa615c062bd42ab4aa5422597fec, type: 3}
   projectilePos: {fileID: 951068533}
   sightRange: 4
@@ -1320,7 +1320,7 @@ MonoBehaviour:
   health: 120
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 5
-  timeBetweenAttacks: 0.5
+  timeBetweenAttacks: 2
   projectile: {fileID: 3811167990288252575, guid: 14e4aa615c062bd42ab4aa5422597fec, type: 3}
   projectilePos: {fileID: 1920044773}
   sightRange: 4
@@ -2288,6 +2288,8 @@ MonoBehaviour:
   jump: 5
   walkSpeed: 10
   playerCamera: {fileID: 963194227}
+  isWalking: 0
+  isRunning: 0
   projectile: {fileID: 2369002665294184600, guid: b4b6ea0ffc4dc954c855620565eb559a, type: 3}
   projectilePos: {fileID: 454112218}
 --- !u!1 &1103108909
