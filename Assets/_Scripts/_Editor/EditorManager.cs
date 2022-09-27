@@ -23,7 +23,13 @@ public class EditorManager : MonoBehaviour
     //Will send notifications that something has happened to whoever is interested
     Subject subject = new Subject();
 
+    private void OnEnable() {
+        inputAction.Enable();
+    }
 
+    private void OnDisable() {
+        inputAction.Disable();
+    }
 
     // Start is called before the first frame update
     void Awake()

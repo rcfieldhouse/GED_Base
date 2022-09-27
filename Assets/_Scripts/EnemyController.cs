@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
+                     //Debug.Log (Quaternion.Euler(agent.velocity));
     }
 
     private void Patroling()
@@ -50,7 +51,7 @@ public class EnemyController : MonoBehaviour
 
         if (walkPointSet)
             agent.SetDestination(walkPoint);
-
+      
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //Walkpoint reached
