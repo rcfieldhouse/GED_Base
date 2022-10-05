@@ -24,6 +24,7 @@ public class CommandInvoker : MonoBehaviour
     }
     public void UndoCommand()
     {
+   
         Debug.Log("tried to undo");
         if(commandHistory.Count >= 0)
         {

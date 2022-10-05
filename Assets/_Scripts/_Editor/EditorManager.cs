@@ -45,7 +45,7 @@ public class EditorManager : MonoBehaviour
         inputAction = new PlayerAction();
 
         inputAction.Editor.EditorMode.performed += cntxt => EnterEditorMode();
-
+        inputAction.Editor.ChangeToRed.performed += cntxt => changeRed();
         inputAction.Editor.AddItem1.performed += cntxt => AddItem(1);
         inputAction.Editor.AddItem2.performed += cntxt => AddItem(2);
         inputAction.Editor.DropItem.performed += cntxt => DropItem();
@@ -98,15 +98,21 @@ public class EditorManager : MonoBehaviour
 
             command = new PlaceItemCommand(item.transform.position, item.transform);
             CommandInvoker.AddCommand(command);
-
+            
             instantiated = false; 
         }        
     }
-
+    public void changeRed()
+    {
+      
+        subject.ChangeToRed();
+    }
     // Update is called once per frame
     void Update()
     {
-        if(mainCam.enabled == false && editorCam.enabled == true)
+
+      
+        if (mainCam.enabled == false && editorCam.enabled == true)
         {
             Time.timeScale = 0;
             editorMode = true;  

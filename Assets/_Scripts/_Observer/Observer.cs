@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Observer 
 {
     public abstract void OnNotify();
+    public abstract void ChangeToRed();
 }
 
 public class SpikeBall : Observer
@@ -25,8 +26,13 @@ public class SpikeBall : Observer
     public override void OnNotify()
     {
         SpikeColor(spikeEvent.SpikeEditorColor());
+        
     }
+    public override void ChangeToRed()
+    {
+        SpikeColor(spikeEvent.ChangeToRed());
 
+    }
     //The box will always jump in this case
     void SpikeColor(Color mat)
     {

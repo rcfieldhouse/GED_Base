@@ -232,6 +232,15 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeToRed"",
+                    ""type"": ""Button"",
+                    ""id"": ""f069df85-3341-413e-9b98-68868104e4dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -300,6 +309,17 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""action"": ""Save"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a2533e6-39d5-45fc-8d80-3ec1ca279404"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeToRed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -321,6 +341,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         m_Editor_DropItem = m_Editor.FindAction("DropItem", throwIfNotFound: true);
         m_Editor_Undo = m_Editor.FindAction("Undo", throwIfNotFound: true);
         m_Editor_Save = m_Editor.FindAction("Save", throwIfNotFound: true);
+        m_Editor_ChangeToRed = m_Editor.FindAction("ChangeToRed", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -451,6 +472,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_Editor_DropItem;
     private readonly InputAction m_Editor_Undo;
     private readonly InputAction m_Editor_Save;
+    private readonly InputAction m_Editor_ChangeToRed;
     public struct EditorActions
     {
         private @PlayerAction m_Wrapper;
@@ -461,6 +483,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         public InputAction @DropItem => m_Wrapper.m_Editor_DropItem;
         public InputAction @Undo => m_Wrapper.m_Editor_Undo;
         public InputAction @Save => m_Wrapper.m_Editor_Save;
+        public InputAction @ChangeToRed => m_Wrapper.m_Editor_ChangeToRed;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -488,6 +511,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Save.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnSave;
                 @Save.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnSave;
                 @Save.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnSave;
+                @ChangeToRed.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnChangeToRed;
+                @ChangeToRed.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnChangeToRed;
+                @ChangeToRed.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnChangeToRed;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -510,6 +536,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Save.started += instance.OnSave;
                 @Save.performed += instance.OnSave;
                 @Save.canceled += instance.OnSave;
+                @ChangeToRed.started += instance.OnChangeToRed;
+                @ChangeToRed.performed += instance.OnChangeToRed;
+                @ChangeToRed.canceled += instance.OnChangeToRed;
             }
         }
     }
@@ -530,5 +559,6 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         void OnDropItem(InputAction.CallbackContext context);
         void OnUndo(InputAction.CallbackContext context);
         void OnSave(InputAction.CallbackContext context);
+        void OnChangeToRed(InputAction.CallbackContext context);
     }
 }
