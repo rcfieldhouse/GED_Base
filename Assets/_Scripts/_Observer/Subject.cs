@@ -28,13 +28,15 @@ public class Subject
             observers[i].ChangeToRed();
         }
     }
-    public void ChangeToRed(int i)
+    public void ChangeToRed(GameObject i)
     {
+      
+        //Notify all observers even though some may not be interested in what has happened
+        //Each observer should check if it is interested in this event
+      
+            observers[0].ChangeToRed();
         
-            //Notify all observers even though some may not be interested in what has happened
-            //Each observer should check if it is interested in this event
-
-            observers[i].ChangeToRed();
+          
     }
     //Add observer to the list
     public void AddObserver(Observer observer)

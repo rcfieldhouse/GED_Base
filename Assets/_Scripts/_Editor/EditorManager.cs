@@ -107,6 +107,11 @@ public class EditorManager : MonoBehaviour
       
         subject.ChangeToRed();
     }
+    public void changeRed(GameObject gameObject)
+    {
+
+        subject.ChangeToRed(gameObject);
+    }
     // Update is called once per frame
     void Update()
     {

@@ -19,7 +19,7 @@ public class ShootToChangeRed : MonoBehaviour
     {
         if (other.collider.tag == "Bullet")
         {
-            EditorManager.instance.changeRed();
+            EditorManager.instance.changeRed(other.gameObject);
         }
     }
 
