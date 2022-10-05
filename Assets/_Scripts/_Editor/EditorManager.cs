@@ -23,6 +23,7 @@ public class EditorManager : MonoBehaviour
     //Will send notifications that something has happened to whoever is interested
     Subject subject = new Subject();
 
+    ICommand command;
      private void OnEnable() {
          inputAction.Enable();
      }
@@ -93,6 +94,10 @@ public class EditorManager : MonoBehaviour
         {
             item.GetComponent<Rigidbody>().useGravity = true;
             item.GetComponent<Collider>().enabled = true;
+
+            command = new PlaceItemCommand(item.transform.position, item.transform);
+            CommandInvoker.AddCommand(command);
+
             instantiated = false; 
         }        
     }
