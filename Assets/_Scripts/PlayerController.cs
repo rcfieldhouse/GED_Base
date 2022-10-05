@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour
     public GameObject projectile;
     public Transform projectilePos;
 
-
+    public WaitForSeconds shotDelay = new WaitForSeconds(1.0f);
+    private bool _CanShoot = true;
 
     private void Start() {
 
@@ -74,11 +75,21 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        Rigidbody bulletRb = Instantiate(projectile, projectilePos.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-        bulletRb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-        bulletRb.AddForce(transform.up * 3f, ForceMode.Impulse);
+        if (_CanShoot == true)
+        {
+            Rigidbody bulletRb = Instantiate(projectile, projectilePos.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            bulletRb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+            bulletRb.AddForce(transform.up * 3f, ForceMode.Impulse);
+            StartCoroutine(resetShot());
+        }
+        
     }
-
+    private IEnumerator resetShot()
+    {
+        _CanShoot = false;
+        yield return shotDelay;
+        _CanShoot = true;
+    }
     // Update is called once per frame
     void Update()
     {

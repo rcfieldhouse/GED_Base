@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
     // public TextMeshProUGUI text;
     int score;
-
+ 
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,6 +19,7 @@ public class ScoreManager : MonoBehaviour
 
     public void ChangeScore(int coinValue)
     {
+       
         score += coinValue;
         Debug.Log(score);
         // text.text = score.ToString();
