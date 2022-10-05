@@ -24,6 +24,7 @@ public class EditorManager : MonoBehaviour
     Subject subject = new Subject();
 
     ICommand command;
+
      private void OnEnable() {
          inputAction.Enable();
      }

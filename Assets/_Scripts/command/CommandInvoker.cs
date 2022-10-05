@@ -9,7 +9,7 @@ public class CommandInvoker : MonoBehaviour
     static Queue<ICommand> commandBuffer;
     static List<ICommand> commandHistory;
 
-    static int counter;
+    static int counter=0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +24,12 @@ public class CommandInvoker : MonoBehaviour
     }
     public void UndoCommand()
     {
-        if(commandHistory.Count <= 0)
+        Debug.Log("tried to undo");
+        if(commandHistory.Count >= 0)
         {
             if (counter > 0)
             {
-                counter++;
+                counter--;
                 commandHistory[counter].Undo();
             }
         }
@@ -51,7 +52,10 @@ public class CommandInvoker : MonoBehaviour
 
             commandHistory.Add(c);
             counter++;
-            //Debug.log("command History length
+
+            Debug.Log("command History length" + commandHistory.Count);
+            Debug.Log("counter " + counter);
         }
+       
     }
 }

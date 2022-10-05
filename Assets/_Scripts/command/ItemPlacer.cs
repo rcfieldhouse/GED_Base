@@ -20,7 +20,9 @@ public class ItemPlacer : MonoBehaviour
         {
             if (items[i].position == position)
             {
-                GameObject.Destroy(items[i]);
+                Debug.Log("tried to remove item at index "+ i);
+               
+               Destroy(items[i].gameObject);
                 items.RemoveAt(i);
                 break;
 
